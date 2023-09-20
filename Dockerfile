@@ -4,6 +4,10 @@ FROM continuumio/miniconda3:23.5.2-0 as conda_install
 
 FROM r-base:4.3.1
 
+RUN apt-get update && \
+    apt-get install --assume-yes \
+    git
+
 COPY --from=julia_install /usr/local/julia /usr/local/julia
 ENV JULIA_PATH /usr/local/julia
 ENV PATH $JULIA_PATH/bin:$PATH
